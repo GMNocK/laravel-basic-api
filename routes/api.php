@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('customers', CustomersController::class)->except(['update', 'create', 'edit', 'destroy']);
+Route::post('/customers/{id}', [CustomersController::class, 'update']);
+Route::post('/customers/{id}', [CustomersController::class, 'destroy']);
